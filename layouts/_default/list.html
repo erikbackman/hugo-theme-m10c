@@ -1,8 +1,9 @@
 {{ define "main" }}
   <article>
-    <h1>{{ .Title }}</h1>
+    <h1>Posts</h1>
     <ul class="posts-list">
-      {{ range where .Paginator.Pages "Type" "!=" "page" }}
+      {{ range where .Site.Pages "Type" "posts" }}
+      {{ if ne .Title "Posts" }}
         <li class="posts-list-item">
           <a class="posts-list-item-title" href="{{ .Permalink }}">{{ .Title }}</a>
           <span class="posts-list-item-description">
@@ -13,6 +14,7 @@
             {{ .ReadingTime }} min read
           </span>
         </li>
+      {{ end }}
       {{ end }}
     </ul>
     {{ partial "pagination.html" $ }}
